@@ -2,7 +2,7 @@ CREATE DATABASE vet_clinic;
 
 CREATE TABLE animals (
   id INT, 
-  name CHAR(40), 
+  name VARCHAR, 
   date_of_birth DATE, 
   escape_attempts INT, 
   neutered BOOLEAN, 
