@@ -25,11 +25,11 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 Vet Clinic Database 🐈 <a name="about-project"></a>
+# 📖 Vet Clinic Database <a name="about-project"></a>
 
 
 
-**Vet Clinic** is a relational database designed to manage the data structure for a vet clinic, including information on animals, their owners, and clinic visits.
+**Vet Clinic** is a relational database designed to create the data structure for a vet clinic.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -89,7 +89,7 @@ Clone this repository to your desired folder:
 Go to the project directory.
 
 ```bash
-  cd vet-clinic
+  cd Vet-Clinic
 ```
 
 ### Usage
