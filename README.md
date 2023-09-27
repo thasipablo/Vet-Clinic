@@ -160,13 +160,13 @@ Thanks to all <img src="https://assets-global.website-files.com/5dbb30f00775d4c3
 
 ## ❓ FAQ <a name="faq"></a>
 
-- **How do I set up the database locally?**
+- **Q: How do I create the database and tables for the vet clinic project?**
 
-  - You can run the SQL scripts in a local MySQL environment to set up the database.
+   A: To set up the database and tables, run the provided SQL script in the `schema.sql` file.
 
-- **How can I run the SQL queries?**
+- **Q: What SQL queries can I perform on the vet clinic database?**
 
-  - Use your preferred SQL client to run the queries stored in the queries.sql file.
+   A: You can execute SQL queries to retrieve, update, and add animal data. Examples are in the `queries.sql` file.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
