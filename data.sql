@@ -14,3 +14,62 @@ VALUES
   ('Boarmon', NULL, '2005-06-07', 20.4, true, 7),
   ('Blossom', NULL, '1998-10-13', 17, true, 3),
   ('Ditto', NULL, '2022-05-14', 22, true, 4);
+
+--- Request multiple tables
+INSERT INTO owners (full_name, age)
+VALUES 
+  ('Sam Smith', 34),
+  ('Jennifer Orwell', 19),
+  ('Bob', 45),
+  ('Melody Pond', 77),
+  ('Dean Winchester', 14),
+  ('Jodie Whittaker', 38);
+
+INSERT INTO species (name)
+VALUES 
+  ('Pokemon'),
+  ('Digimon');
+
+BEGIN;
+update animals set 
+  species_id=(select id from species where name = 'Digimon') 
+  where name like '%mon';
+SELECT * FROM animals;
+
+update animals set 
+  species_id=(select id from species where name = 'Pokemon') 
+  where name not like '%mon';
+SELECT * FROM animals;
+
+update animals set 
+  owner_id=(select id from owners where full_name = 'Sam Smith') 
+  where name like 'Agumon';
+SELECT * FROM animals;
+
+update animals set 
+  owner_id=(select id from owners where full_name = 'Jennifer Orwell') 
+  where name like 'Gabumon' or name like 'Pikachu';
+SELECT * FROM animals;
+
+update animals set 
+  owner_id=(select id from owners where full_name = 'Bob') 
+  where name like 'Devimon' or name like 'Devimon';
+SELECT * FROM animals;
+
+update animals set 
+  owner_id=(select id from owners where full_name = 'Melody Pond') 
+  where name like 'Charmander' or name like 'Squirtle' or name like 'Blossom';
+SELECT * FROM animals;
+
+update animals set 
+  owner_id=(select id from owners where full_name = 'Dean Winchester') 
+  where name like 'Angemon' or name like 'Boarmon';
+SELECT * FROM animals;
+
+update animals set 
+  owner_id=(select id from owners where full_name = 'Bob') 
+  where name like 'Plantmon' or name like 'Devimon';
+SELECT * FROM animals;
+
+COMMIT;
+SELECT * FROM animals;
