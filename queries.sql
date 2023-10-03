@@ -73,6 +73,71 @@ SELECT o.full_name, COUNT(a.id) AS animal_count
   ORDER BY animal_count DESC
   LIMIT 1;
 
+--- Add Vets and Visits ---
+
+SELECT a.name AS last_animal_seen
+  FROM visits AS v
+  JOIN animals AS a ON v.animal_id = a.id
+  WHERE v.vet_id = (SELECT id FROM vets WHERE name = 'William Tatcher')
+  ORDER BY v.visit_date DESC
+  LIMIT 1;
+
+SELECT COUNT(DISTINCT v.animal_id) AS num_animals_seen
+  FROM visits AS v
+  WHERE v.vet_id = (SELECT id FROM vets WHERE name = 'Stephanie Mendez');
+
+SELECT v.name AS vet_name, COALESCE(array_agg(s.name), '{}'::text[]) AS specialties
+  FROM vets AS v
+  LEFT JOIN specializations AS sp ON v.id = sp.vet_id
+  LEFT JOIN species AS s ON sp.species_id = s.id
+  GROUP BY v.name;
+
+SELECT a.name AS animal_name
+  FROM visits AS v
+  JOIN animals AS a ON v.animal_id = a.id
+  WHERE v.vet_id = (SELECT id FROM vets WHERE name = 'Stephanie Mendez')
+  AND v.visit_date >= '2020-04-01' AND v.visit_date <= '2020-08-30';
+
+SELECT a.name AS most_visited_animal
+  FROM (
+      SELECT animal_id, COUNT(*) AS visit_count
+      FROM visits
+      GROUP BY animal_id
+      ORDER BY visit_count DESC
+      LIMIT 1
+  ) AS most_visits
+  JOIN animals AS a ON most_visits.animal_id = a.id;
+
+SELECT vet.name AS first_vet_visited
+  FROM visits AS v
+  JOIN vets AS vet ON v.vet_id = vet.id
+  WHERE v.animal_id = (SELECT id FROM animals WHERE name = 'Maisy Smith')
+  ORDER BY v.visit_date ASC
+  LIMIT 1;
+
+SELECT a.name AS animal_name, vet.name AS vet_name, v.visit_date AS last_visit_date
+  FROM visits AS v
+  JOIN animals AS a ON v.animal_id = a.id
+  JOIN vets AS vet ON v.vet_id = vet.id
+  ORDER BY v.visit_date DESC
+  LIMIT 1;
+
+SELECT COUNT(*) AS num_visits_without_specialty
+  FROM visits AS v
+  JOIN animals AS a ON v.animal_id = a.id
+  LEFT JOIN specializations AS sp ON v.vet_id = sp.vet_id AND a.species_id = sp.species_id
+  WHERE sp.vet_id IS NULL;
+
+SELECT a.name AS most_visited_animal
+  FROM (
+      SELECT animal_id, COUNT(*) AS visit_count
+      FROM visits
+      GROUP BY animal_id
+      ORDER BY visit_count DESC
+      LIMIT 1
+  ) AS most_visits
+  JOIN animals AS a ON most_visits.animal_id = a.id;
+
 EXPLAIN ANALYSE SELECT COUNT(*) FROM visits WHERE animal_id = 4;
 
 EXPLAIN ANALYSE SELECT COUNT(*) FROM visits where animal_id = 4;
