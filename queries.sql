@@ -72,3 +72,9 @@ SELECT o.full_name, COUNT(a.id) AS animal_count
   GROUP BY o.full_name
   ORDER BY animal_count DESC
   LIMIT 1;
+
+EXPLAIN ANALYSE SELECT COUNT(*) FROM visits WHERE animal_id = 4;
+
+EXPLAIN ANALYSE SELECT COUNT(*) FROM visits where animal_id = 4;
+EXPLAIN ANALYSE SELECT * FROM visits where vet_id = 2;
+EXPLAIN ANALYSE SELECT * FROM owners where email = 'owner_18327@mail.com';
