@@ -137,3 +137,9 @@ SELECT a.name AS most_visited_animal
       LIMIT 1
   ) AS most_visits
   JOIN animals AS a ON most_visits.animal_id = a.id;
+
+EXPLAIN ANALYSE SELECT COUNT(*) FROM visits WHERE animal_id = 4;
+
+EXPLAIN ANALYSE SELECT COUNT(*) FROM visits where animal_id = 4;
+EXPLAIN ANALYSE SELECT * FROM visits where vet_id = 2;
+EXPLAIN ANALYSE SELECT * FROM owners where email = 'owner_18327@mail.com';
